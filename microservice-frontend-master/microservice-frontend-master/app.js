@@ -62,7 +62,44 @@ function fetchProductList() {
 }
 
 function fetchOneProduct($id) {
-    // function body
+
+    jsonObj = [];
+    item = {};
+    var productList;
+    var productListAdd;
+
+    jsonObj.push(item);
+
+    $.ajax({
+        url: Url+'GetOneProduct',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'text/plain',
+        data: jsonObj[0],
+
+        success: function (data) {
+            productList='';
+
+            $.each(data['data']['List'], function(i, item) {
+
+                productListAdd = '<div class="col-sm-6 col-md-4 col-lg-3 mt-4" id="product'+item['id']+'">\n' +
+                    '            <div class="card card-inverse card-info">\n' +
+                    '                <img class="card-img-top" src="'+item['image']+'">\n' +
+                    '                <div class="card-block">\n' +
+                    '                    <h4><span class="badge badge-danger">'+item['price']+'</span></h4>\n' +
+                    '                    <div class="meta card-text">\n' +
+                    '                        <a style="color: deepskyblue">Category - Cell Phones</a>\n' +
+                    '                    </div>\n' +
+                    '        </div>';
+            });
+            $('#items').html(productList);
+
+        },
+        error: function (data) {
+            alert("Error while fetching data.");
+        }
+
+    });
 }
 
 function fetchComments($id) {
