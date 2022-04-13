@@ -75,7 +75,9 @@ function fetchOneProduct($id) {
         type: 'get',
         dataType: 'json',
         contentType: 'text/plain',
-        data: jsonObj[0],
+        data: {
+            "product_id": $id
+        },
 
         success: function (data) {
             productList='';
@@ -90,9 +92,10 @@ function fetchOneProduct($id) {
                     '                    <div class="meta card-text">\n' +
                     '                        <a style="color: deepskyblue">Category - Cell Phones</a>\n' +
                     '                    </div>\n' +
+
                     '        </div>';
             });
-            $('#items').html(productList);
+            $('#items').html(productListAdd);
 
         },
         error: function (data) {
